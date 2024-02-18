@@ -50,7 +50,7 @@ end
 function act_status()
 	local e={}
 	local binpath=uci:get("AdGuardHome","AdGuardHome","binpath")
-	e.running=luci.sys.call("pgrep "..binpath.." >/dev/null")==0
+	e.running=luci.sys.call("pgrep -f "..binpath.." >/dev/null")==0
 	e.redirect=(fs.readfile("/var/run/AdGredir")=="1")
 	http.prepare_content("application/json")
 	http.write_json(e)
